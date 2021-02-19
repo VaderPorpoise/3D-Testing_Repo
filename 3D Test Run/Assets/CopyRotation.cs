@@ -9,6 +9,7 @@ public class CopyRotation : MonoBehaviour
     ConfigurableJoint CJ;
     Quaternion startRot;
 
+   
     void Start()
     {
         CJ = GetComponent<ConfigurableJoint>();
@@ -17,10 +18,18 @@ public class CopyRotation : MonoBehaviour
 
     void Update()
     {
-        if (!inverse) CJ.targetRotation = targetLimb.localRotation * startRot;
-       
 
-        else CJ.targetRotation = Quaternion.Inverse(targetLimb.localRotation) * startRot;
-        Debug.Log(CJ.targetRotation);
+        if (!inverse)
+        {
+            CJ.targetRotation = targetLimb.localRotation;
+
+        }
+
+
+
+        else CJ.targetRotation = Quaternion.Euler(Vector3.forward * 90);
+
+       // else CJ.targetRotation = Quaternion.Inverse(targetLimb.localRotation);
+
     }
 }

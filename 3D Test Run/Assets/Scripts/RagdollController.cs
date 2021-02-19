@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Animations;
 public class RagdollController : MonoBehaviour
 {
     [Header("player settings")]
-  
-  
-    float playerMovementForce = 200f;
 
-    float playerSprintMultiplier;
-    float playerJumpForce = 10000;
+    public float playerMovementForce = 5f;
+    float playerMovementFloatForce = 50f;
+
+
+    float playerSprintMultiplier = 2f;
+    float playerJumpForce = 100;
 
 
     float GroundThreshold = 0.4f;
@@ -26,23 +27,25 @@ public class RagdollController : MonoBehaviour
 
     [Header("cached components")]
 
-    //InputManager inputManager;
-    CharacterController controller;
 
+
+    public Animator targetRagdollAnimator;
     bool isGrounded;
 
-    [Header("Gravity")]
-    Vector3 velocity;
+
 
     bool isJumping = false;
     void Start()
     {
 
-        //inputManager = GetComponent<InputManager>();
-        controller = GetComponent<CharacterController>();
+
+
+
     }
     void Update()
     {
+
+
 
         Playerdirection();
 
@@ -55,6 +58,13 @@ public class RagdollController : MonoBehaviour
     void FixedUpdate()
     {
         ApplyMovement();
+
+
+    }
+
+    void FloatCharacter()
+    {
+        hips.AddForce(hips.transform.forward * playerMovementFloatForce);
     }
     #region myOwnLeanScript
     void lean()
@@ -65,13 +75,25 @@ public class RagdollController : MonoBehaviour
 
     void Playerdirection()
     {
-        movementVector.x = Input.GetAxis("Horizontal");
-        movementVector.z = Input.GetAxis("Vertical");
+
+
+
+        movementVector.x = Input.GetAxis("Horizontal") * playerMovementForce;
+
+        movementVector.z = Input.GetAxis("Vertical") * playerMovementForce;
+
+        targetRagdollAnimator.SetBool("isRunning", false);
+        if (movementVector.z > 0 || movementVector.z < 0)
+        {
+            targetRagdollAnimator.SetBool("isRunning", true);
+            //FloatCharacter();
+        }
+
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            Debug.Log("sprinting");
-            movementVector.x = Input.GetAxis("Horizontal") * playerSprintMultiplier;
-            movementVector.z = Input.GetAxis("Vertical") * playerSprintMultiplier;
+
+            movementVector.x = Input.GetAxis("Horizontal") * playerSprintMultiplier * playerMovementForce;
+            movementVector.z = Input.GetAxis("Vertical") * playerSprintMultiplier * playerMovementForce;
         }
     }
     void CheckJump()
@@ -89,18 +111,21 @@ public class RagdollController : MonoBehaviour
     }
     void ApplyMovement()
     {
-        
-       
-        hips.AddForce(playerMovementForce * movementVector);
+
+        movementVector.y = hips.velocity.y;
+
+        hips.velocity = (movementVector);
+
 
 
 
         if (isJumping)
         {
-            hips.AddForce(hips.transform.up * playerJumpForce);
+
+            hips.AddForce(hips.transform.forward * playerJumpForce, ForceMode.Impulse);
 
             //jump 
-           
+
             isJumping = false;
         }
     }
