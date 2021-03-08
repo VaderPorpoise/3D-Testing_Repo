@@ -7,14 +7,15 @@ public class mouseLook : MonoBehaviour
 
     [Header("variables")]
 
-    float xRotation = 0 ;
+    float xRotation = 0;
+
     public float XRot
     {
         get
         {
             return xRotation;
         }
-       
+
     }
 
 
@@ -51,10 +52,10 @@ public class mouseLook : MonoBehaviour
 
     }
 
-    
+
     void LateUpdate()
     {
-        
+
         camTrans.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
     }
 

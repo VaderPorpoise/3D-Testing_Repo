@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public class Weapon_Revolver : WeaponBlueprint
+public class Gun_Revolver : GunBluePrint
 {
 
     // Start is called before the first frame update
     void Start()
     {
+        // set the weapon stats
+
         bulletSpeed = 25f;
         bulletDamage = 15;
         setUpWeapon();
-       
+
         weaponsManager.OnShoot += WeaponsManager_OnShoot;
     }
 
@@ -31,7 +33,6 @@ public class Weapon_Revolver : WeaponBlueprint
         //mouseLook.XRot;
     }
 
-    float XRotation = 0;
     void rotateTowardsCursor()
     {
 
