@@ -23,7 +23,7 @@ public class MeleeBluePrint : MonoBehaviour
     float knockBack = 100f;
 
     [Header("animationClips")]
-    public AnimationClip IdleNoMotion;
+    public AnimationClip IdleMeeleAnimation;
     public AnimationClip swingAnimation;
     public AnimationClip BlockAnimation;
     public AnimationClip ThrowAnimation;
@@ -45,10 +45,10 @@ public class MeleeBluePrint : MonoBehaviour
     protected void setUpWeapon()
     {
         WeaponsManager = FindObjectOfType<PlayerWeaponsManager>();
-        Debug.Log(WeaponsManager);
+
         mouseLook = FindObjectOfType<mouseLook>();
         playerObject = WeaponsManager.gameObject;
-
+        WeaponsManager.TargetAnimator.changeAnimationState(IdleMeeleAnimation.name, 1);
 
 
     }
@@ -58,9 +58,10 @@ public class MeleeBluePrint : MonoBehaviour
 
         if (isSwinging) return;
         StartCoroutine(SwingCoroutine(swingAnimation));
-        WeaponsManager.TargetAnimator.changeAnimationState(swingAnimation, 0);
+    
+        WeaponsManager.TargetAnimator.changeAnimationState(swingAnimation.name, 1);
         //animator mask must contain the animationclip/action and must be weight 1
-        Debug.Log(swingAnimation.length);
+     
 
 
 
@@ -69,7 +70,7 @@ public class MeleeBluePrint : MonoBehaviour
     protected void block()
     {
 
-        WeaponsManager.TargetAnimator.changeAnimationState(BlockAnimation, 1);
+       
         //animator mask must contain the animationclip/action and must be weight 1
 
 
@@ -88,9 +89,12 @@ public class MeleeBluePrint : MonoBehaviour
     }
     public IEnumerator SwingCoroutine(AnimationClip animation)
     {
+        isSwinging = true;
+        
         yield return new WaitForSeconds(animation.length);
+        
         isSwinging = false;
-
+        WeaponsManager.TargetAnimator.changeAnimationState(IdleMeeleAnimation.name, 1);
     }
     protected void applyKnockBack()
     {

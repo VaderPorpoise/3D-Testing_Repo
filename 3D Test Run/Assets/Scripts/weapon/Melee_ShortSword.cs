@@ -26,12 +26,7 @@ public class Melee_ShortSword : MeleeBluePrint
         {
             Throw();
         }
-        else
-        {
-            WeaponsManager.TargetAnimator.changeAnimationState(IdleNoMotion, 1);
-            WeaponsManager.TargetAnimator.changeAnimationState(Ragdoll_Idle, 0);
-
-        }
+       
     }
 
 }

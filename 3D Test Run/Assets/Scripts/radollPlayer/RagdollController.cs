@@ -65,21 +65,17 @@ public class RagdollController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Y))
         {
-           Application.targetFrameRate
+
 
         }
 
         movementvec.x = Input.GetAxisRaw("Horizontal");
         movementvec.z = Input.GetAxisRaw("Vertical");
 
-        if (weaponsManager.hasSword)
-        {
-            AimSword();
-
-        }
+        
 
 
-        Roll();
+       
         animate();
     }
 
@@ -123,20 +119,7 @@ public class RagdollController : MonoBehaviour
 
     }
 
-    void AimGun()
-    {
-
-
-
-
-    }
-    void AimSword()
-    {
-
-
-
-
-    }
+   
     void Movement()
     {
 
@@ -146,6 +129,7 @@ public class RagdollController : MonoBehaviour
 
             movementvec.x *= playerSprintMultiplier;
             movementvec.y *= playerSprintMultiplier;
+            
 
         }
 
@@ -216,16 +200,27 @@ public class RagdollController : MonoBehaviour
 
     void animate()
     {
-        if (!isGrounded && targetRagdollAnimator.isAttacking) return;
+       // if (weaponsManager.hasGun || weaponsManager.hasSword) return;
 
         if (Mathf.Abs(movementvec.z) > 0)
         {
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                targetRagdollAnimator.changeAnimationState(Ragdoll_Sprint.name, 0);
+                return;
+            }
             //animate walk foreward and backward
-            targetRagdollAnimator.changeAnimationState(Ragdoll_Walk, 0);
+            targetRagdollAnimator.changeAnimationState(Ragdoll_Walk.name, 0);
 
 
         }
-        else { targetRagdollAnimator.changeAnimationState(Ragdoll_Idle, 0); }
+        else  
+        {
+
+            targetRagdollAnimator.changeAnimationState(Ragdoll_Idle.name, 0);
+        }
+
+
 
 
     }

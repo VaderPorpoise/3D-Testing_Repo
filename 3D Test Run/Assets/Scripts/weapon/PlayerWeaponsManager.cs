@@ -9,7 +9,7 @@ public class PlayerWeaponsManager : MonoBehaviour
     public MyAnimator TargetAnimator;
     public GameObject startingGun;
     public Transform GunStartingPoint;
-    public Transform SwordStartingPoint;
+    public Transform MeleeStartingPoint;
 
     public GunBluePrint[] currentGuns;
     public GunBluePrint[] currentMeleeWeapons;
@@ -30,11 +30,10 @@ public class PlayerWeaponsManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            SpawnStartingSword();
+            SpawnStartingGun();
         }
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-
             // OnShoot?.Invoke(this, new OnShootEventArgs { weaponID = equipedWeaponID });
             OnShoot?.Invoke(this, EventArgs.Empty);
         }
@@ -43,27 +42,19 @@ public class PlayerWeaponsManager : MonoBehaviour
     {
 
 
-        if (currentGuns.Length > 0 && !hasGun)
-        {
-            startingGun = currentGuns[0].gameObject;
-            GameObject gun = EquipWeapon(startingGun);
-            gun.GetComponent<GunBluePrint>().weaponsManager = this;
-            hasGun = true;
-        }
+
+        //startingGun = currentGuns[0].gameObject;
+        GameObject gun = EquipWeapon(startingGun, true);
+        gun.GetComponent<GunBluePrint>().weaponsManager = this;
+        hasGun = true;
+
 
     }
     void SpawnStartingSword()
     {
-
-
-
-
-        GameObject melee = EquipWeapon(startingSword);
+        GameObject melee = EquipWeapon(startingSword, false);
         melee.GetComponent<MeleeBluePrint>().WeaponsManager = this;
         hasGun = true;
-
-
-
     }
     // Start is called before the first frame update
     void Start()
@@ -78,11 +69,19 @@ public class PlayerWeaponsManager : MonoBehaviour
     }
 
 
-    GameObject EquipWeapon(GameObject weapon)
+    GameObject EquipWeapon(GameObject weapon, bool isGun)
     {
+        if (isGun)
+        {
+            GameObject gun = Instantiate(weapon, GunStartingPoint);
+            return gun;
+        }
+        else
+        {
+            GameObject melee = Instantiate(weapon, MeleeStartingPoint);
+            return melee;
+        }
 
-        GameObject gun = Instantiate(weapon, GunStartingPoint);
-        return gun;
     }
 
     GameObject SwapWeapons(GameObject weapon)

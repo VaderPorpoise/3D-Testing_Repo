@@ -445,8 +445,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meleeDmg: 0
   WeaponTag: 
-  IdleNoMotion: {fileID: 7400000, guid: e1e501e4351c46e40af904d779838377, type: 2}
-  swingAnimation: {fileID: 7400000, guid: ea7f5fad5c4722f44ad8b3fe72c877a6, type: 2}
-  BlockAnimation: {fileID: 7400000, guid: 85f997623f0cce2449012c607af28e0c, type: 2}
+  IdleMeeleAnimation: {fileID: 7400000, guid: dd60c85e7400fcf4bbe5df97e9ea03e3, type: 2}
+  swingAnimation: {fileID: 7400000, guid: 85f997623f0cce2449012c607af28e0c, type: 2}
+  BlockAnimation: {fileID: 7400000, guid: ea7f5fad5c4722f44ad8b3fe72c877a6, type: 2}
   ThrowAnimation: {fileID: 7400000, guid: 141cdd45e6d726b46b6dd9dce118e8bc, type: 2}
+  Ragdoll_Idle: {fileID: 7400000, guid: 58853101af0dae04e8b462c38cf47f85, type: 2}
   WeaponsManager: {fileID: 0}

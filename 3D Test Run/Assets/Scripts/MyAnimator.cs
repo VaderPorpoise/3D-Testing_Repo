@@ -6,7 +6,7 @@ public class MyAnimator : MonoBehaviour
 {
     Animator TargetAnimator;
     public AnimationClip IdleAnimation;
-    private AnimationClip currentState;
+    private string currentState;
     public bool isAttacking = false;
     // Start is called before the first frame update
     void Start()
@@ -14,18 +14,37 @@ public class MyAnimator : MonoBehaviour
         TargetAnimator = GetComponent<Animator>();
 
     }
-    public void changeAnimationState(AnimationClip newState, int layerID)
+    void Update()
     {
-        if (currentState == newState) return;
+        // for debugging an animation
 
-        TargetAnimator.Play(newState.name, layerID);
-        //  Debug.Log("statechange1");
+       // Debug.Log("State is: "+currentState);
+    }
+
+    public void changeAnimationState(string newState, int layerID)
+    {
+
+
+
+
+        if (currentState == newState)
+        {
+
+
+            return;
+        }
+        TargetAnimator.Play(newState, layerID);
+        
         currentState = newState;
+
+
+
+
 
     }
     float seconds;
 
-  
-   
+
+
 
 }
