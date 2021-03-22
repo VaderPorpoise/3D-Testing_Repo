@@ -30,7 +30,7 @@ public class thirdPersonMouseLook : MonoBehaviour
 
     public ConfigurableJoint hipJoint, stomachJoint;
 
-    float stomachOffset = -20;
+    float stomachOffset = 0;
 
     public Transform GunMount;
 

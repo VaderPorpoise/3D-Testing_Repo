@@ -30,6 +30,11 @@ public class PlayerWeaponsManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            
+            SpawnStartingSword();
+        } if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+
             SpawnStartingGun();
         }
         if (Input.GetKeyDown(KeyCode.Mouse0))

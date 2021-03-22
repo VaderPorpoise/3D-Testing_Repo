@@ -13,17 +13,12 @@ public class Gun_Revolver : GunBluePrint
         bulletSpeed = 25f;
         bulletDamage = 15;
         setUpWeapon();
-
         weaponsManager.OnShoot += WeaponsManager_OnShoot;
     }
 
     private void WeaponsManager_OnShoot(object sender, EventArgs e)
     {
-
         shootWeaponProjectile(WeaponTag, shootPointTrans.position, shootPointTrans.rotation);
-
-
-
     }
 
 
@@ -31,6 +26,7 @@ public class Gun_Revolver : GunBluePrint
     void Update()
     {
         //mouseLook.XRot;
+        DebugRay(20);
     }
 
     void rotateTowardsCursor()

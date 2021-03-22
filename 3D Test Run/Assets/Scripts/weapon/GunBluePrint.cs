@@ -62,6 +62,10 @@ public class GunBluePrint : MonoBehaviour
         weaponsManager.knockBackPart.AddForce(-knockBack * weaponsManager.knockBackPart.transform.up, ForceMode.Impulse);
 
     }
+    protected void DebugRay(float distance)
+    {
+        Debug.DrawRay(shootPointTrans.position, transform.right * distance, Color.red);
+    }
     public void shootWeaponRaycast()
     {
 
