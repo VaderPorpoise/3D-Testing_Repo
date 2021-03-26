@@ -72,10 +72,10 @@ public class RagdollController : MonoBehaviour
         movementvec.x = Input.GetAxisRaw("Horizontal");
         movementvec.z = Input.GetAxisRaw("Vertical");
 
-        
 
 
-       
+
+
         animate();
     }
 
@@ -119,7 +119,7 @@ public class RagdollController : MonoBehaviour
 
     }
 
-   
+
     void Movement()
     {
 
@@ -129,7 +129,7 @@ public class RagdollController : MonoBehaviour
 
             movementvec.x *= playerSprintMultiplier;
             movementvec.y *= playerSprintMultiplier;
-            
+
 
         }
 
@@ -138,7 +138,7 @@ public class RagdollController : MonoBehaviour
         {
 
 
-            hips.AddForce(hips.transform.up * (playerMovementForce * movementvec.z));
+            hips.AddForce(hips.transform.forward * (playerMovementForce * movementvec.z));
         }
 
 
@@ -154,7 +154,7 @@ public class RagdollController : MonoBehaviour
         if (Input.GetKey(KeyCode.S))
         {
 
-            hips.AddForce(hips.transform.up * (playerMovementForce * movementvec.z));
+            hips.AddForce(hips.transform.forward * (playerMovementForce * movementvec.z));
         }
 
 
@@ -200,7 +200,7 @@ public class RagdollController : MonoBehaviour
 
     void animate()
     {
-       // if (weaponsManager.hasGun || weaponsManager.hasSword) return;
+        // if (weaponsManager.hasGun || weaponsManager.hasSword) return;
 
         if (Mathf.Abs(movementvec.z) > 0)
         {
@@ -214,7 +214,7 @@ public class RagdollController : MonoBehaviour
 
 
         }
-        else  
+        else
         {
 
             targetRagdollAnimator.changeAnimationState(Ragdoll_Idle.name, 0);

@@ -53,7 +53,7 @@ public class thirdPersonMouseLook : MonoBehaviour
         mouseY -= Input.GetAxis("Mouse Y") * Time.deltaTime * inputManager.mouseSensitivity;
 
         TPSCamLook();
-        FPSCamLook();
+       // FPSCamLook();
 
     }
     void FixedUpdate()
@@ -67,16 +67,16 @@ public class thirdPersonMouseLook : MonoBehaviour
 
         followTargetTrans.rotation = targetRot;
 
-        hipJoint.targetRotation = Quaternion.Euler(0, 0, -mouseX);
+        hipJoint.targetRotation = Quaternion.Euler(0, -mouseX, 0);
 
-        stomachJoint.targetRotation = Quaternion.Euler(mouseY + stomachOffset, 0, 0);
+       stomachJoint.targetRotation = Quaternion.Euler(mouseY + stomachOffset, 0, 0);
     }
 
     void FPSCamLook()
     {
         FPS.gameObject.transform.rotation = Quaternion.Euler(mouseY, mouseX, 0);
 
-        hipJoint.targetRotation = Quaternion.Euler(0, 0, -mouseX);
+       hipJoint.targetRotation = Quaternion.Euler(0, 0, -mouseX);
 
         stomachJoint.targetRotation = Quaternion.Euler(mouseY + stomachOffset, 0, 0);
 
