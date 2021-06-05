@@ -32,7 +32,7 @@ public class thirdPersonMouseLook : MonoBehaviour
 
     float stomachOffset = 0;
 
-    public Transform GunMount;
+
 
     // Start is called before the first frame update
     void Start()
@@ -47,13 +47,13 @@ public class thirdPersonMouseLook : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse3))
         {
-            ChangeVCamTrigger();
+           ChangeVCamTrigger();
         }
         mouseX += Input.GetAxis("Mouse X") * Time.deltaTime * inputManager.mouseSensitivity;
         mouseY -= Input.GetAxis("Mouse Y") * Time.deltaTime * inputManager.mouseSensitivity;
 
         TPSCamLook();
-       // FPSCamLook();
+       FPSCamLook();
 
     }
     void FixedUpdate()
@@ -69,27 +69,27 @@ public class thirdPersonMouseLook : MonoBehaviour
 
         hipJoint.targetRotation = Quaternion.Euler(0, -mouseX, 0);
 
-       stomachJoint.targetRotation = Quaternion.Euler(mouseY + stomachOffset, 0, 0);
+       stomachJoint.targetRotation = Quaternion.Euler(mouseY+stomachOffset, 0, 0);
     }
 
     void FPSCamLook()
     {
         FPS.gameObject.transform.rotation = Quaternion.Euler(mouseY, mouseX, 0);
 
-       hipJoint.targetRotation = Quaternion.Euler(0, 0, -mouseX);
+       hipJoint.targetRotation = Quaternion.Euler(0, -mouseX, 0);
 
-        stomachJoint.targetRotation = Quaternion.Euler(mouseY + stomachOffset, 0, 0);
+        stomachJoint.targetRotation = Quaternion.Euler(mouseY , 0, 0);
 
     }
     void rotategun()
     {
-        GunMount.localRotation = Quaternion.Euler(mouseY, mouseX, 0);
+       // GunMount.localRotation = Quaternion.Euler(mouseY, mouseX, 0);
 
     }
 
     public CinemachineVirtualCamera TPS;
     public CinemachineVirtualCamera FPS;
-    bool IsFPS;
+    bool IsFPS=false;
     void ChangeVCamTrigger()
     {
         Debug.Log("changed to");

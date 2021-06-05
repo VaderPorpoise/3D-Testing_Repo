@@ -29,8 +29,6 @@ public class MyAnimator : MonoBehaviour
 
         if (currentState == newState)
         {
-
-
             return;
         }
         TargetAnimator.Play(newState, layerID);

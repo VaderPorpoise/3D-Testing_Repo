@@ -53,6 +53,7 @@ public class RagdollController : MonoBehaviour
 
     Vector3 stillVelocity;
 
+    
     void Start()
     {
 
@@ -89,9 +90,10 @@ public class RagdollController : MonoBehaviour
         hips.velocity = stillVelocity;
 
 
-        Movement();
 
-        GroundCheck();
+        Movement();
+     
+      
 
 
     }
@@ -123,7 +125,7 @@ public class RagdollController : MonoBehaviour
     void Movement()
     {
 
-
+        GroundCheck();
         if (Input.GetKey(KeyCode.LeftShift))
         {
 
@@ -147,7 +149,7 @@ public class RagdollController : MonoBehaviour
         {
 
 
-            hips.AddForce(-hips.transform.right * (playerStrafeMultiplier * playerMovementForce * movementvec.x));
+            hips.AddForce(hips.transform.right * (playerStrafeMultiplier * playerMovementForce * movementvec.x));
         }
 
 
@@ -161,7 +163,7 @@ public class RagdollController : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
 
-            hips.AddForce(-hips.transform.right * (playerStrafeMultiplier * playerMovementForce * movementvec.x));
+            hips.AddForce(hips.transform.right * (playerStrafeMultiplier * playerMovementForce * movementvec.x));
 
         }
 
@@ -169,7 +171,7 @@ public class RagdollController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
-            hips.AddForce(hips.transform.forward * playerJumpForce, ForceMode.Impulse);
+            hips.AddForce(hips.transform.up * playerJumpForce, ForceMode.Impulse);
         }
 
 
@@ -177,6 +179,7 @@ public class RagdollController : MonoBehaviour
 
         else if (isGrounded)
         {
+            Debug.Log("floating");
 
             FloatCharacter();
         }
